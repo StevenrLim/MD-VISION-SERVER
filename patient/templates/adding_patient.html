@@ -1,0 +1,56 @@
+{% include 'base_template.html' %}
+
+{% block content %}
+
+<h2>New Patient Form </h2>
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form method="POST">
+            {{ form.hidden_tag() }}
+
+            {{ form.f_name.label(class="cal-form-label") }}
+            {{ form.f_name(class="form-control") }}
+
+            {{ form.l_name.label(class="cal-form-label") }}
+            {{ form.l_name(class="form-control") }}
+
+            {{ form.status.label(class="cal-form-label") }}
+            {{ form.status(class="form-control") }}
+
+            {{ form.med_notes.label(class="cal-form-label") }}
+            {{ form.med_notes(class="form-control", rows=10, cols=40) }}
+        
+            {{ form.date_birth.label(class="cal-form-label") }}
+            {{ form.date_birth(class="form-control") }}
+
+            {{ form.OHIP_num.label(class="cal-form-label") }}
+            {{ form.OHIP_num(class="form-control") }}
+            <br/>
+            {{ form.submit(class="btn btn-primary") }}
+    </form>
+</div>
+
+
+<br/><br/>
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <th scope="col">Status</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>   
+        <th scope="col">Last Name</th>   
+        <th scope="col">Last Modification</th>   
+    </thead>
+    <tbody>
+        {% for our_patient in our_patients %}
+            <tr>
+                <th scope="row">{{ our_patient.status }}</th>
+                <td>{{ our_patient.f_name }}</td>
+                <td>{{ our_patient.l_name }}</td>
+                <td>{{ our_patient.date_birth }}</td>
+                <td>{{ our_patient.date_mod }}</td>
+            </tr>
+        {% endfor %}    
+    </tbody>
+</table>
+
+
+{% endblock %}

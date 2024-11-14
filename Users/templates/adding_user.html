@@ -1,0 +1,44 @@
+{% include 'base_template.html' %}
+
+{% block content %}
+
+<h2>New User Form </h2>
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form method="POST">
+            {{ form.hidden_tag() }}
+
+            {{ form.name.label(class="cal-form-label") }}
+            {{ form.name(class="form-control") }}
+
+            {{ form.userID.label(class="cal-form-label") }}
+            {{ form.userID(class="form-control") }}
+
+            {{ form.password.label(class="cal-form-label") }}
+            {{ form.password(class="form-control") }}
+
+            <br/>
+            {{ form.submit(class="btn btn-primary") }}
+    </form>
+</div>
+
+
+<br/><br/>
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">UserID</th>
+        <th scope="col">Name</th>   
+    </thead>
+    <tbody>
+        {% for our_user in our_users %}
+            <tr>
+                <th scope="row">{{ our_user.id }}</th>
+                <td>{{ our_user.userID }}</td>
+                <td>{{ our_user.name }}</td>
+            </tr>
+        {% endfor %}    
+    </tbody>
+</table>
+
+
+{% endblock %}

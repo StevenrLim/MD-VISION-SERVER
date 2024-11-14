@@ -1,0 +1,31 @@
+{% include 'base_template.html' %}
+
+{% block content %}
+<h2> Patient List: </h2>
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <label for="search" class="form_label" width="100px">Search Filter</label>
+    <input class="form-control" type="search" name="search" placeholder="Begin typing to search users" hx-post="/search" hx-trigger="keyup changed" hx-target="#search-results">
+    <br/>
+    <a type="button" class="btn btn-dark" href="{{ url_for('patient.add_patient')}}" role="button" width="100px">Add</a>
+</div>
+<br/>
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+    </thead>
+    <tbody id="search-results">
+        {% for our_patient in our_patients %}
+            <tr>
+                <th scope="row">{{ our_patient.id }}</th>
+                <td>    
+                    <a href="{{ url_for('patient.update_patient', id=our_patient.id) }}">{{ our_patient.f_name }}</a>
+                </td>
+                <td>{{ our_patient.l_name }}</td>
+            </tr>
+        {% endfor %}   
+    </tbody>
+</table>
+
+{% endblock %}
