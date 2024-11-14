@@ -1,0 +1,32 @@
+{% include 'base_template.html' %}
+
+{% block content %}
+
+<h2> Authorized User List: </h2>
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <label for="search" class="form_label" width="100px">Search Filter</label>
+    <input class="form-control" type="search" name="search" placeholder="Begin typing to search users" hx-post="/search_user_" hx-trigger="keyup changed" hx-target="#search-results">
+    <br/>
+    <a type="button" class="btn btn-dark" href="{{ url_for('Users.add_user')}}" role="button" width="100px">Add</a>
+</div>
+<br/>
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">UserID</th>
+        <th scope="col">Name</th>   
+    </thead>
+    <tbody id="search-results">
+        {% for our_user in our_users %}
+            <tr>
+                <th scope="row">{{ our_user.id }}</th>
+                <td>    
+                    <a href="{{ url_for('Users.update', id=our_user.id) }}">{{ our_user.userID }}</a>
+                </td>
+                <td>{{ our_user.name }}</td>
+            </tr>
+        {% endfor %}   
+    </tbody>
+</table>
+
+{% endblock %}
