@@ -4,6 +4,8 @@ from datetime import datetime
 from dotenv import load_dotenv
 import os
 
+from flask_compress import Compress
+
 #Defined Imports
 #from modules.forms import newUserForm
 #from modules.models import Users, db
@@ -14,10 +16,11 @@ from global_model import db
 
 
 load_dotenv()
-print(os.getenv("FLASK_ENV"))
+#print(os.getenv("FLASK_ENV"))
 
 #Creating Flask Instance
 app = Flask(__name__)
+Compress(app)
 app.config['SECRET_KEY'] = "G11_ROCKS"
 
 #Add Databse
@@ -40,14 +43,19 @@ app.register_blueprint(Users_bp)
 def index():
     return render_template("index.html")
 
-
+@app.route('/ping')
 def ping():
-    return jsonify({"message": " Luka smells like shit!"}), 200
-
-
+    print("test")
+    message = jsonify({"message":"idk"})
+    json_data = message.get_data()
+    print(json_data)
+    json_size = len(json_data)
+    print(json_size)
+    return message, 200
 #@app.route('/delete', methods=['POST'])
 #def delete():
-   
+
+
 
 
 
